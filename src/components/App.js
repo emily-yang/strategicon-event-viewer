@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Schedule from './Schedule';
 
-
 class App extends Component {
     constructor() {
         super();
@@ -11,10 +10,10 @@ class App extends Component {
         }
     }
 
-    changeDay = (selectedDay) => {
+    changeDay(selectedDay) {
         console.log(selectedDay);
         const day = this.state.day;
-        this.setState( {day: selectedDay });
+        this.setState( {day: selectedDay});
     };
 
     render() {
