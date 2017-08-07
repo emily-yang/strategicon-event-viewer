@@ -12,5 +12,6 @@ const AppClient = () => (
 );
 
 window.onload = () => {
+console.log('accesing app-client');
   render(<AppClient />, document.getElementById('main'));
 };

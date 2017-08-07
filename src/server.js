@@ -5,6 +5,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router } from 'react-router-dom';
 import App from './components/App';
+import scraper from './scraper';
 
 const app = new express();
 
@@ -15,12 +16,15 @@ app.set('views', `${__dirname}/views`);
 // define the folder that will be used for static assets
 app.use(express.static(`${__dirname}/static`));
 
+app.get('/json', (req,res) => {
+  res.json();
+});
 // universal routing and rendering
 app.get('*', (req, res) => {
   let markup = '';
   let status = 200;
 
-
+    console.log('accesing server.js');
     const context = {};
     markup = renderToString(
       <Router location={req.url} context={context}>
@@ -33,13 +37,9 @@ app.get('*', (req, res) => {
       return res.redirect(302, context.url);
     }
 
-    if (context.is404) {
-      status = 404;
-    }
-  
-
   return res.render('index', {markup});
 });
+
 
 // start the server
 const port = process.env.PORT || 3000;
