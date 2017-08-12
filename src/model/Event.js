@@ -7,12 +7,10 @@ const eventSchema = new mongoose.Schema({
 		trim: true,
 		require: 'Need a name'
 	},
-	group: String,
-	type: String,
+	category: String,
 	day: String,
-	startTime: String,
+	time: String,
 	duration: String,
-	id: String,
 	gm: String,
 	desc: String
 });
