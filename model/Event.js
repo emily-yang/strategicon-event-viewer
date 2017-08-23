@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const eventSchema = new mongoose.Schema({
+	_id: {
+		type: String,
+		require: 'Needs an id'
+	},
 	title:{
 		type: String,
 		trim: true,
@@ -13,6 +17,6 @@ const eventSchema = new mongoose.Schema({
 	duration: String,
 	gm: String,
 	desc: String
-});
+}, { _id: false });
 
 module.exports = mongoose.model('Event', eventSchema);

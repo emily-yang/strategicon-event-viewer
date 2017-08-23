@@ -1,21 +1,41 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Schedule from './Schedule';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    constructor() {
+        super();
+        this.state = {
+            day: "Fri",
+            times: {}
+        }
+    }
+
+    changeDay(selectedDay) {
+        console.log(selectedDay);
+        const day = this.state.day;
+        this.setState( {day: selectedDay});
+    };
+
+    componentDidMount() {
+        console.log("componentDidMount");
+        fetch('/api', { method: 'get' })
+            .then( res => {console.log(res)});
+    }
+
+    render() {
+        return (
+            <div className="day-select">
+                <label for="day-select">Select a day:</label>
+                <select name="day-select" onChange={(e) => this.changeDay(e.target.value)}>
+                    <option value="Fri">Friday</option>
+                    <option value="Sat">Saturday</option>
+                    <option value="Sun">Sunday</option>
+                    <option value="Mon">Monday</option>
+                </select>
+                <Schedule day={this.state.day}/>
+            </div>
+        );
+    }
 }
 
 export default App;

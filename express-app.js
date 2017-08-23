@@ -5,6 +5,7 @@ const MongoStore = require('connect-mongo')(session);
 const path = require('path');
 const bodyParser = require('body-parser');
 const promisify = require('es6-promisify');
+const { parseSchedule } = require('./scraper');
 
 // create Express app
 const app = express();
@@ -42,6 +43,6 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/', (req, res) => res.send('step one done!'));
+app.get('/api', (req, res) => res.send(parseSchedule()));
 
 module.exports = app;
