@@ -10,6 +10,7 @@ const Event = require('./model/Event');
 exports.parseSchedule = async function(){
 	console.log('inside parseSchedule');
 	const url = "http://www.strategicon.net/index.php?goto=events&disp_descs=Y";
+	const eventList = [];
 
 	const { JSDOM } = jsdom;
 	await JSDOM
@@ -33,13 +34,22 @@ exports.parseSchedule = async function(){
 				gm,
 				desc
 			});
-			// event.save();
-			Event.findOneAndUpdate( {_id: id }, event, { upsert: true }, () => {console.log(`Saved ${title}`)});
+			eventList.push({id, title, category, day, time, duration, gm, desc});
+			// eventList[id] = {
+			// 	title,
+			// 	category,
+			// 	day,
+			// 	time,
+			// 	duration,
+			// 	gm,
+			// 	desc				
+			// };
+			Event.findOneAndUpdate( {_id: id }, event, { upsert: true }, () => {});
 		}
-		console.log('Events saved to MongoDB');
 	})
 	.catch( (error) => {});
-	return 'Done with parseSchedule';
+	//console.log("EventList from parseSchedule is ", eventList);
+	return eventList;
 };
 
 function getDayTimeDuration(listing) {

@@ -42,7 +42,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-app.get('/api', (req, res) => res.send(parseSchedule()));
+app.get('/api', async (req, res) => res.send(await parseSchedule()));
 
 module.exports = app;

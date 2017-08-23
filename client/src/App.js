@@ -6,7 +6,8 @@ class App extends Component {
         super();
         this.state = {
             day: "Fri",
-            times: {}
+            times: {},
+            events: []
         }
     }
 
@@ -17,9 +18,12 @@ class App extends Component {
     };
 
     componentDidMount() {
+        const url = '/api';
+        // const url = 'https://randomuser.me/api/?results=10';
         console.log("componentDidMount");
-        fetch('/api', { method: 'get' })
-            .then( res => {console.log(res)});
+        fetch(url)
+            .then( res => res.json())
+            .then(res => { console.log(res); this.setState( { events: res})})
     }
 
     render() {
