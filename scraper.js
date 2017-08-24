@@ -1,11 +1,6 @@
 const jsdom = require("jsdom");
 const mongoose = require("mongoose");
-//const Event = mongoose.model('Event');
 const Event = require('./model/Event');
-
-// 1. scrape content from website
-// 2. clean content
-// 3. save to db
 
 exports.parseSchedule = async function(){
 	console.log('inside parseSchedule');
@@ -19,7 +14,6 @@ exports.parseSchedule = async function(){
 		const document = dom.window.document;
 		const listings = document.querySelectorAll('.Board, .RPG');
 		for (let i = 0; i < listings.length; i++) {
-			// console.log(listings[2].children[3].textContent);
 			const category = listings[i].classList.contains('Board') ? 'boardgame' : 'rpg';
 			const [day, time, duration] = getDayTimeDuration(listings[i]);
 			const [title, gm, desc, id] = getTitleGmDesc(listings[i]);
@@ -34,21 +28,11 @@ exports.parseSchedule = async function(){
 				gm,
 				desc
 			});
-			eventList.push({id, title, category, day, time, duration, gm, desc});
-			// eventList[id] = {
-			// 	title,
-			// 	category,
-			// 	day,
-			// 	time,
-			// 	duration,
-			// 	gm,
-			// 	desc				
-			// };
 			Event.findOneAndUpdate( {_id: id }, event, { upsert: true }, () => {});
+			eventList.push({id, title, category, day, time, duration, gm, desc});
 		}
 	})
 	.catch( (error) => {});
-	//console.log("EventList from parseSchedule is ", eventList);
 	return eventList;
 };
 

@@ -5,13 +5,6 @@ import Event from './Event';
 
 class Schedule extends Component {
 
-	renderEvent(event) {
-		return (
-			<Event details={event}/>
-		);
-
-	};
-
 	render() {
 		const events = this.props.events;
 		return (
@@ -30,7 +23,8 @@ class Schedule extends Component {
 }
 
 Schedule.propTypes = {
-	day: PropTypes.string.isRequired
+	day: PropTypes.string.isRequired,
+	events: PropTypes.object.isRequired
 };
 
 export default Schedule;

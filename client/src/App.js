@@ -12,7 +12,6 @@ class App extends Component {
     }
 
     changeDay(selectedDay) {
-        console.log(selectedDay);
         const day = this.state.day;
         this.setState( {day: selectedDay});
     };

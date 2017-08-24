@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Event extends Component {
 	render() {
@@ -9,10 +10,12 @@ class Event extends Component {
 				<p>Time: {this.props.event.time}</p>
 				<p>Duration: {this.props.event.duration}</p>
 			</div>
-			
-
 		);
 	}
 }
+
+Event.propTypes = {
+	events: PropTypes.object.isRequired
+};
 
 export default Event;
