@@ -18,12 +18,10 @@ class App extends Component {
     };
 
     componentDidMount() {
-        const url = '/api';
-        // const url = 'https://randomuser.me/api/?results=10';
         console.log("componentDidMount");
-        fetch(url)
+        fetch('/api')
             .then( res => res.json())
-            .then(res => { console.log(res); this.setState( { events: res})})
+            .then(res => { this.setState( { events: res})})
     }
 
     render() {
@@ -36,7 +34,7 @@ class App extends Component {
                     <option value="Sun">Sunday</option>
                     <option value="Mon">Monday</option>
                 </select>
-                <Schedule day={this.state.day}/>
+                <Schedule day={this.state.day} events={this.state.events.filter(event => event.day === this.state.day)} />
             </div>
         );
     }
