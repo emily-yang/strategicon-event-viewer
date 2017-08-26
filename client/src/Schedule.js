@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Header from './Header';
+import Options from './Options';
 import Event from './Event';
 
 class Schedule extends Component {
@@ -10,7 +10,7 @@ class Schedule extends Component {
 		return (
 			<div className="schedule">
 				<h2>Schedule for {this.props.day}</h2>
-				<Header />
+				<Options categories={this.props.categories} toggleCategory={this.props.toggleCategory} />
 				<ul className="list-of-events">
 					{
 						events.map( event => <Event key={event.id} event={event} />)
@@ -24,7 +24,6 @@ class Schedule extends Component {
 
 Schedule.propTypes = {
 	day: PropTypes.string.isRequired,
-	events: PropTypes.object.isRequired
 };
 
 export default Schedule;
